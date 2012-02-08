@@ -9,6 +9,11 @@ Introduction
 Vim can't dispaly characters which have them glyphs for each like web browser.
 So unfortunately, vimmer can't preview markdown text over editing on terminal.
 This is a GUI application which can display preview of markdown.
+This plugin support:
+
+* Markdown
+* reStructuredText
+* Textile
 
 Installation
 ------------
