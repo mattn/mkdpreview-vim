@@ -43,7 +43,7 @@ If you have previewer already, Just type:
 Screenshot
 ----------
 
-![](screenshot.png)
+![](https://github.com/mattn/mkdpreview-vim/raw/master/static/screenshot.png)
 
 Author
 ------
