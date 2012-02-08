@@ -13,10 +13,11 @@ function! s:mkdpreview(bang)
     else
       call system(printf("%s & 2>&1 /dev/null", s:pyscript))
     endif
-    if v:shell_error != 0 && ((has('win32') || has('win64')) && v:shell_error != 52)
-      echohl ErrorMsg | echomsg "fail to start 'mkdpreview.py'" | echohl None
-      return
-    endif
+    " FIXME: On MacOSX system() above return v:shell_error 7.
+    "if v:shell_error != 0 && ((has('win32') || has('win64')) && v:shell_error != 52)
+    "  echohl ErrorMsg | echomsg "fail to start 'mkdpreview.py'" | echohl None
+    "  return
+    "endif
     augroup MkdPreview
       autocmd!
       autocmd BufWritePost <buffer> call <SID>update_preview()
