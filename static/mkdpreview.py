@@ -4,6 +4,7 @@ import os
 import sys
 import json
 import cgi
+import imp
 from threading import Thread
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -11,6 +12,8 @@ from PyQt4.QtWebKit import *
 from PyQt4.QtNetwork import *
 from BaseHTTPServer import HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
+
+plugins = {}
 
 os.chdir(os.path.dirname(__file__))
 
@@ -26,10 +29,16 @@ QObject.connect(webview, SIGNAL("preview(QString)"), do_eval)
 
 class PreviewHandler(SimpleHTTPRequestHandler):
   def do_POST(self):
-    s = self.rfile.read(int(self.headers.getheader('content-length')))
-    p = cgi.parse_qs(s)
-    webview.emit(SIGNAL("preview(QString)"), p["data"][0])
-    self.wfile.write("")
+    try:
+      s = self.rfile.read(int(self.headers.getheader('content-length')))
+      p = cgi.parse_qs(s)
+      typ = p.has_key("type") and p["type"][0] or "markdown"
+      if not plugins.has_key(typ):
+        plugins[typ] = imp.load_source("mod_%s" % typ, "plugin/mod_%s.py" % typ)
+      webview.emit(SIGNAL("preview(QString)"), plugins[typ].preview(p["data"][0]))
+      self.wfile.write("OK")
+    except:
+      self.wfile.write("Unexpected error: %s" % sys.exc_info()[0])
 
 class WebServer(QThread):
   def __init__(self):
