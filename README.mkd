@@ -22,12 +22,9 @@ This require following third party modules or vim plugins.
 
 * python (2.7 or later) <http://python.org/>
 * PyQt4 <http://www.riverbankcomputing.co.uk/software/pyqt/download>
+* Markdown in Python <http://www.freewisdom.org/projects/python-markdown/>
 * curl command <http://curl.haxx.se/libcurl/>
 * webapi-vim <http://github.com/mattn/webapi-vim>
-
-This product contains following third party module.
-
-* markdown-js https://github.com/evilstreak/markdown-js
 
 Usage
 -----
