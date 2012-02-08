@@ -20,7 +20,7 @@ QNetworkProxyFactory.setUseSystemConfiguration(True)
 app = QApplication(sys.argv)
 webview = QWebView()
 webview.setWindowTitle('Markdown Previewer')
-webview.load(QUrl("http://localhost:8081"))
+webview.load(QUrl("http://localhost:%d" % port))
 def do_eval(js):
   webview.page().mainFrame().evaluateJavaScript(
       "preview(%s)" % json.dumps(unicode(js, 'utf-8')))
