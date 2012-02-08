@@ -12,6 +12,7 @@ function! s:mkdpreview(bang)
       silent exe "!start pythonw ".shellescape(s:pyscript)
     else
       call system(printf("%s & 2>&1 /dev/null", s:pyscript))
+      sleep 1
     endif
     " FIXME: On MacOSX system() above return v:shell_error 7.
     "if v:shell_error != 0 && ((has('win32') || has('win64')) && v:shell_error != 52)
