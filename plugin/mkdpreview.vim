@@ -1,9 +1,10 @@
 let s:pyscript = expand('<sfile>:p:h:h') . '/static/mkdpreview.py'
 
 function! s:update_preview()
-  call http#post('http://localhost:8081/', {
+  let ret = http#post('http://localhost:8081/', {
   \ "data" : join(getline(1, line('$')), "\n")
   \})
+  echo ret.content
 endfunction
 
 function! s:mkdpreview(bang)

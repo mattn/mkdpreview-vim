@@ -35,10 +35,13 @@ class PreviewHandler(SimpleHTTPRequestHandler):
       typ = p.has_key("type") and p["type"][0] or "markdown"
       if not plugins.has_key(typ):
         plugins[typ] = imp.load_source("mod_%s" % typ, "plugin/mod_%s.py" % typ)
-      webview.emit(SIGNAL("preview(QString)"), plugins[typ].preview(p["data"][0]))
+      data = plugins[typ].preview(unicode(p["data"][0], 'utf-8'))
+      webview.emit(SIGNAL("preview(QString)"), data.encode('utf-8'))
       self.wfile.write("OK")
     except:
-      self.wfile.write("Unexpected error: %s" % sys.exc_info()[0])
+      e = sys.exc_info()[0]
+      print e
+      self.wfile.write("Unexpected error: %s" % e)
 
 class WebServer(QThread):
   def __init__(self):
