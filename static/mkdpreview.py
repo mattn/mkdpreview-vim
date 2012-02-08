@@ -19,13 +19,10 @@ port = int(os.getenv("mkdpreview_port") or "8081")
 QNetworkProxyFactory.setUseSystemConfiguration(True)
 app = QApplication(sys.argv)
 webview = QWebView()
-webview.setWindowTitle('Markdown Previewer')
-webview.load(QUrl("http://localhost:%d" % port))
 def do_eval(js):
   webview.page().mainFrame().evaluateJavaScript(
       "preview(%s)" % json.dumps(unicode(js, 'utf-8')))
 QObject.connect(webview, SIGNAL("preview(QString)"), do_eval)
-webview.show()
 
 class PreviewHandler(SimpleHTTPRequestHandler):
   def do_POST(self):
@@ -44,6 +41,10 @@ class WebServer(QThread):
 
 server = WebServer()
 server.start()
+
+webview.setWindowTitle('Markdown Previewer')
+webview.load(QUrl("http://localhost:%d" % port))
+webview.show()
 
 sys.exit(app.exec_())
 
