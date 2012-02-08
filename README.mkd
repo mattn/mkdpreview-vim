@@ -1,0 +1,51 @@
+MkdPreview
+==========
+
+Markdown previewer for vimmer.
+
+Introduction
+------------
+
+Vim can't dispaly characters which have them glyphs for each like web browser.
+So unfortunately, vimmer can't preview markdown text over editing on terminal.
+This is a GUI application which can display preview of markdown.
+
+Installation
+------------
+
+Just simple! Copy or git-clone mkdpreview-vim into your `~/.vim/bundle`.
+
+    # cd /path/to/your/.vimrc/bundle
+    # git clone https://github.com/mattn/mkdpreview-vim
+
+This require following third party modules or vim plugins.
+
+* python (2.7 or later) <http://python.org/>
+* PyQt4 <http://www.riverbankcomputing.co.uk/software/pyqt/download>
+* curl command <http://curl.haxx.se/libcurl/>
+* webapi-vim <http://github.com/mattn/webapi-vim>
+
+This product contains following third party module.
+
+* markdown-js https://github.com/evilstreak/markdown-js
+
+Usage
+-----
+
+    :MkdPreview!
+
+If you have previewer already, Just type:
+
+    :MkdPreview
+
+`:MkdPreview!` command install `BufWritePost` hook for current buffer. Then preview will be updated just to do `:w`.
+
+Screenshot
+----------
+
+![](screenshot.png)
+
+Author
+------
+
+  Yasuhiro Matsumoto <mattn.jp@gmail.com>

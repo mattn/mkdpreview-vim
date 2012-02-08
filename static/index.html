@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+<style>
+body {
+	color: #222;
+	margin: 1em;
+	font-family: Arial, Helvetica;
+	line-height: 1.6;
+}
+pre {
+	padding: 1em;
+	border: 1px solid #ccc;
+}
+* :not(pre) > code {
+	padding: 2px;
+	border: 1px solid #ccc;
+}
+blockquote {
+	background-color: #e78;
+}
+</style>
+<script src="markdown.js"></script>
+<script>
+function preview(s) {
+	document.body.innerHTML = markdown.toHTML(s);
+}
+</script>
+</head>
+<body>
+</body>
