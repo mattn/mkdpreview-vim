@@ -5,6 +5,7 @@ import sys
 import json
 import cgi
 import imp
+import signal
 from threading import Thread
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -16,6 +17,7 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 plugins = {}
 
 os.chdir(os.path.dirname(__file__))
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 port = int(os.getenv("mkdpreview_port") or "8081")
 
