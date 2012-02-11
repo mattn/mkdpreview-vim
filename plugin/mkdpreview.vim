@@ -2,7 +2,8 @@ let s:pyscript = expand('<sfile>:p:h:h') . '/static/mkdpreview.py'
 
 function! s:update_preview()
   let ret = http#post('http://localhost:8081/', {
-  \ "data" : join(getline(1, line('$')), "\n")
+  \ "data" : join(getline(1, line('$')), "\n"),
+  \ "type" : &filetype
   \})
   echo ret.content
 endfunction
