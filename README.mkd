@@ -1,7 +1,7 @@
 MkdPreview
 ==========
 
-Markdown previewer for vimmer.
+Markdown Previewer for Vimmer.
 
 Introduction
 ------------
