@@ -11,11 +11,23 @@ endfunction
 function! s:mkdpreview(bang)
   if a:bang == '!'
     if has('win32') || has('win64')
-      silent exe "!start pythonw ".shellescape(s:pyscript)
+      if exists('g:mkdpreview_python_path')
+        silent exe printf("!start %s %s",
+        \ shellescape(g:mkdpreview_python_path),
+        \ shellescape(s:pyscript))
+      else
+        silent exe "!start pythonw ".shellescape(s:pyscript)
+      endif
     else
-      call system(printf("%s & 2>&1 /dev/null", s:pyscript))
-      sleep 1
+      if exists('g:mkdpreview_python_path')
+        call system(printf("%s %s & 2>&1 /dev/null",
+        \ shellescape(s:mkdpreview_python_path),
+        \ shellescape(s:pyscript))
+        else
+        call system(printf("%s & 2>&1 /dev/null", shellescape(s:pyscript)))
+      endif
     endif
+    sleep 1
     " FIXME: On MacOSX system() above return v:shell_error 7.
     "if v:shell_error != 0 && ((has('win32') || has('win64')) && v:shell_error != 52)
     "  echohl ErrorMsg | echomsg "fail to start 'mkdpreview.py'" | echohl None
