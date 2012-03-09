@@ -21,6 +21,50 @@ blockquote {
 }
 </style>
 <script>
+(function () {
+  var KeyEvents = {
+    j: function (count) {
+      window.scrollBy(0, 100 * count);
+    },
+    k: function (count) {
+      window.scrollBy(0, -100 * count);
+    },
+    h: function (count) {
+      window.scrollBy(-100 * count, 0);
+    },
+    l: function (count) {
+      window.scrollBy(100 * count, 0);
+    },
+    g: function (count) {
+      window.scrollTo(0, 0);
+    },
+    G: function (count) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+
+  var count = '';
+
+  document.addEventListener(
+    'keypress',
+    function(e) {
+      var noModifier = !(e.ctrlKey || e.altKey);
+
+      var c = String.fromCharCode(e.charCode);
+      if (noModifier && /^\d$/.test(c)) {
+        count += c;
+        return;
+      }
+
+      if (noModifier && KeyEvents.hasOwnProperty(c)) {
+        KeyEvents[c](count ? parseInt(count, 10) : 1);
+      }
+
+      count = '';
+    },
+    true
+  );
+})();
 function preview(s) {
 	document.body.innerHTML = s;
 }
