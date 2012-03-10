@@ -21,9 +21,9 @@ function! s:mkdpreview(bang)
     else
       if exists('g:mkdpreview_python_path')
         call system(printf("%s %s & 2>&1 /dev/null",
-        \ shellescape(s:mkdpreview_python_path),
-        \ shellescape(s:pyscript))
-        else
+        \ shellescape(g:mkdpreview_python_path),
+        \ shellescape(s:pyscript)))
+      else
         call system(printf("%s & 2>&1 /dev/null", shellescape(s:pyscript)))
       endif
     endif
