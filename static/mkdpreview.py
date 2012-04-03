@@ -16,7 +16,7 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 
 plugins = {}
 
-os.chdir(os.path.dirname(__file__))
+os.chdir(os.path.dirname(__file__) or '.')
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 port = int(os.getenv("mkdpreview_port") or "8081")
